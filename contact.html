@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ | DEMO STORE</title>
+  <!-- ★ GTM head snippet here -->
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --bg: #f8f7f4;
+      --card-bg: #ffffff;
+      --text: #2d2d2d;
+      --text-light: #6b6b6b;
+      --border: #e8e6e1;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", "Hiragino Sans", "Yu Gothic", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    header { background: var(--primary); color: #fff; padding: 20px 0; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+    .logo span { color: var(--accent); }
+    nav a { color: #ccc; text-decoration: none; margin-left: 24px; font-size: 14px; }
+    nav a:hover { color: #fff; }
+    footer { background: var(--primary); color: #888; padding: 32px 0; text-align: center; font-size: 13px; }
+
+    .form-section { padding: 60px 0; max-width: 600px; margin: 0 auto; }
+    .form-section h1 { font-size: 28px; margin-bottom: 8px; }
+    .form-section .sub { color: var(--text-light); margin-bottom: 36px; font-size: 15px; }
+
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .form-group label .required { color: var(--accent); font-size: 12px; margin-left: 4px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 15px; font-family: inherit; background: #fff; transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--accent); }
+    .form-group textarea { height: 140px; resize: vertical; }
+
+    .btn { display: inline-block; background: var(--accent); color: #fff; padding: 14px 48px; border-radius: 6px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: transform 0.2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+    .note { background: #f0f0ed; border-radius: 8px; padding: 16px 20px; margin-top: 32px; font-size: 13px; color: var(--text-light); }
+  </style>
+  <script>window.dataLayer = window.dataLayer || [];</script>
+</head>
+<body>
+  <!-- ★ GTM body snippet here -->
+
+  <header>
+    <div class="container">
+      <div class="logo">DEMO<span>STORE</span></div>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="product.html">商品一覧</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="form-section">
+      <h1>お問い合わせ</h1>
+      <p class="sub">このフォームはGA4のフォーム送信イベント（generate_lead）の練習用です。<br>実際にはどこにも送信されません。</p>
+
+      <div class="form-group">
+        <label>お名前<span class="required">※必須</span></label>
+        <input type="text" id="name" placeholder="山田 太郎">
+      </div>
+
+      <div class="form-group">
+        <label>メールアドレス<span class="required">※必須</span></label>
+        <input type="email" id="email" placeholder="taro@example.com">
+      </div>
+
+      <div class="form-group">
+        <label>電話番号</label>
+        <input type="tel" id="phone" placeholder="090-1234-5678">
+      </div>
+
+      <div class="form-group">
+        <label>お問い合わせ種別<span class="required">※必須</span></label>
+        <select id="inquiry-type">
+          <option value="">選択してください</option>
+          <option value="product">商品について</option>
+          <option value="shipping">配送について</option>
+          <option value="return">返品・交換</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>お問い合わせ内容<span class="required">※必須</span></label>
+        <textarea id="message" placeholder="お問い合わせ内容をご記入ください"></textarea>
+      </div>
+
+      <button class="btn" id="btn-submit" onclick="submitForm()">送信する</button>
+
+      <div class="note">
+        <strong>★ GTM練習ポイント</strong><br>
+        ・フォーム送信ボタンのクリックトリガー<br>
+        ・generate_lead イベントの設定<br>
+        ・フォーム入力値をdataLayer変数として取得<br>
+        ・サンクスページ遷移をCV（コンバージョン）として設定
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 DEMO STORE — GA4/GTM練習用サイト</p>
+    </div>
+  </footer>
+
+  <script>
+    // ★ フォーム送信イベント
+    function submitForm() {
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var type = document.getElementById('inquiry-type').value;
+      var message = document.getElementById('message').value;
+
+      // 簡易バリデーション
+      if (!name || !email || !type || !message) {
+        alert('必須項目を入力してください');
+        return;
+      }
+
+      // ★ generate_lead イベントをdataLayerにpush
+      dataLayer.push({
+        'event': 'generate_lead',
+        'form_name': 'contact_form',
+        'inquiry_type': type,
+        'event_timestamp': new Date().toISOString()
+      });
+
+      // ★ サンクスページへ遷移（このページ遷移をCVとして設定する練習）
+      window.location.href = 'thanks.html?source=contact';
+    }
+
+    // ★ フォームのフォーカスイベント（form_start の練習）
+    var formStarted = false;
+    document.querySelectorAll('input, select, textarea').forEach(function(el) {
+      el.addEventListener('focus', function() {
+        if (!formStarted) {
+          formStarted = true;
+          dataLayer.push({
+            'event': 'form_start',
+            'form_name': 'contact_form'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

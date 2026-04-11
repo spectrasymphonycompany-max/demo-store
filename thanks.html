@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>完了 | DEMO STORE</title>
+  <!-- ★ GTM head snippet here -->
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --bg: #f8f7f4;
+      --text: #2d2d2d;
+      --text-light: #6b6b6b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", "Hiragino Sans", "Yu Gothic", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    header { background: var(--primary); color: #fff; padding: 20px 0; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+    .logo span { color: var(--accent); }
+    nav a { color: #ccc; text-decoration: none; margin-left: 24px; font-size: 14px; }
+    nav a:hover { color: #fff; }
+    footer { background: var(--primary); color: #888; padding: 32px 0; text-align: center; font-size: 13px; }
+
+    .thanks { text-align: center; padding: 100px 20px; }
+    .thanks .icon { font-size: 64px; margin-bottom: 24px; }
+    .thanks h1 { font-size: 30px; margin-bottom: 12px; }
+    .thanks p { color: var(--text-light); font-size: 16px; max-width: 480px; margin: 0 auto 32px; }
+    .btn { display: inline-block; background: var(--primary); color: #fff; padding: 14px 36px; border-radius: 6px; text-decoration: none; font-size: 15px; font-weight: 600; }
+
+    .debug-box { max-width: 600px; margin: 0 auto 60px; background: #fff; border: 2px dashed var(--accent); border-radius: 12px; padding: 24px; text-align: left; }
+    .debug-box h3 { font-size: 16px; margin-bottom: 12px; color: var(--accent); }
+    .debug-box pre { background: #1a1a2e; color: #a5d6a7; padding: 16px; border-radius: 8px; font-size: 13px; overflow-x: auto; line-height: 1.5; }
+  </style>
+  <script>window.dataLayer = window.dataLayer || [];</script>
+</head>
+<body>
+  <!-- ★ GTM body snippet here -->
+
+  <header>
+    <div class="container">
+      <div class="logo">DEMO<span>STORE</span></div>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="product.html">商品一覧</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="thanks">
+    <div class="icon" id="thanks-icon">✅</div>
+    <h1 id="thanks-title">完了しました！</h1>
+    <p id="thanks-message">ありがとうございます。このページがGA4のコンバージョン地点です。</p>
+    <a href="index.html" class="btn">トップへ戻る</a>
+  </section>
+
+  <!-- ★ dataLayerの中身を可視化（デバッグ用） -->
+  <div class="debug-box">
+    <h3>★ このページで発火したdataLayerイベント</h3>
+    <pre id="dl-output">読み込み中...</pre>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 DEMO STORE — GA4/GTM練習用サイト</p>
+    </div>
+  </footer>
+
+  <script>
+    // URLパラメータでページの種類を判定
+    var params = new URLSearchParams(window.location.search);
+
+    if (params.get('purchased')) {
+      // ★ 購入完了 → purchase イベント発火
+      document.getElementById('thanks-title').textContent = 'ご購入ありがとうございます！';
+      document.getElementById('thanks-message').textContent = '注文が確定しました。purchase イベントが発火しています。';
+      document.getElementById('thanks-icon').textContent = '🎉';
+
+      var transactionId = 'TXN-' + Date.now();
+
+      dataLayer.push({ 'ecommerce': null });
+      dataLayer.push({
+        'event': 'purchase',
+        'ecommerce': {
+          'transaction_id': transactionId,
+          'value': 3980,
+          'currency': 'JPY',
+          'items': [{
+            'item_id': 'SAMPLE-A',
+            'item_name': 'サンプル商品 A',
+            'item_category': 'サンプルカテゴリ',
+            'price': 3980,
+            'currency': 'JPY',
+            'quantity': 1
+          }]
+        }
+      });
+
+    } else if (params.get('source') === 'contact') {
+      // ★ お問い合わせ完了
+      document.getElementById('thanks-title').textContent = 'お問い合わせを受け付けました';
+      document.getElementById('thanks-message').textContent = 'ありがとうございます。generate_lead イベントが発火しています。';
+      document.getElementById('thanks-icon').textContent = '📩';
+
+      dataLayer.push({
+        'event': 'conversion_contact',
+        'conversion_type': 'lead',
+        'event_timestamp': new Date().toISOString()
+      });
+    }
+
+    // ★ dataLayerの中身を画面に表示（デバッグ用）
+    setTimeout(function() {
+      var output = dataLayer.map(function(item, i) {
+        return '--- push #' + i + ' ---\n' + JSON.stringify(item, null, 2);
+      }).join('\n\n');
+      document.getElementById('dl-output').textContent = output;
+    }, 500);
+  </script>
+</body>
+</html>
