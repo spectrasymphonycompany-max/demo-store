@@ -4,9 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>お問い合わせ | DEMO STORE</title>
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-57TL935Z');</script>
-  <style>
-    :root{--primary:#1a1a2e;--accent:#e94560;--bg:#f8f4f4;--text:#2c2c2c;--text-light:#6b6b6b;}
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-57TL935Z'});
+  </script>
+
+  <!-- 電話番号の国を日本に固定 -->
+  <script>
+    window.addEventListener('message', function(event) {
+      if (event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormReady') {
+        var phoneInput = document.querySelector('.hs-input[type="tel"]');
+        if (phoneInput) {
+          var flag = document.querySelector('.flag-dropdown');
+          if (flag) {
+            flag.click();
+            var japan = document.querySelector('[data-dial-code="81"]');
+            if (japan) japan.click();
+          }
+        }
+      }
+    });
+  </script>
     *{margin:0;box-sizing:border-box;}
     body{font-family:"Helvetica Neue","Yu Gothic",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
     header{background:var(--primary);color:#fff;padding:20px 0;}
