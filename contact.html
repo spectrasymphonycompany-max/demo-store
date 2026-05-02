@@ -4,61 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>お問い合わせ | DEMO STORE</title>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-57TL935Z');</script>
-  <!-- End Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-57TL935Z');</script>
   <style>
-    :root {
-      --primary: #1a1a2e;
-      --accent: #e94560;
-      --bg: #f8f4f4;
-      --card-bg: #ffffff;
-      --text: #2c2c2c;
-      --text-light: #6b6b6b;
-    }
-    * { margin: 0; box-sizing: border-box; }
-    body { font-family: "Helvetica Neue", "Yu Gothic", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
-    header { background: var(--primary); color: #fff; padding: 20px 0; }
-    .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-    nav { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
-    nav a { color: #ccc; text-decoration: none; margin-left: 20px; font-size: 14px; }
-    footer { background: #000; padding: 32px 0; text-align: center; font-size: 13px; color: var(--text-light); }
-
-    .form-section { padding: 60px 0; max-width: 600px; margin: 0 auto; }
-    .form-section h1 { font-size: 28px; margin-bottom: 8px; }
-    .form-section p { color: var(--text-light); margin-bottom: 32px; }
-
-    /* HubSpotフォームのスタイル調整 */
-    .hs-form-frame { width: 100%; }
-    .hbspt-form input,
-    .hbspt-form textarea,
-    .hbspt-form select {
-      width: 100% !important;
-      padding: 10px 12px !important;
-      border: 1px solid #ddd !important;
-      border-radius: 6px !important;
-      font-size: 15px !important;
-      font-family: inherit !important;
-      background: #fff !important;
-      margin-bottom: 4px !important;
-    }
-    .hbspt-form .hs-button {
-      background: var(--accent) !important;
-      color: #fff !important;
-      border: none !important;
-      padding: 12px 32px !important;
-      border-radius: 6px !important;
-      font-size: 16px !important;
-      cursor: pointer !important;
-      margin-top: 8px !important;
-    }
-    .hbspt-form label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; margin-top: 16px; }
-    .hbspt-form .hs-error-msgs { color: var(--accent); font-size: 13px; }
+    :root{--primary:#1a1a2e;--accent:#e94560;--bg:#f8f4f4;--text:#2c2c2c;--text-light:#6b6b6b;}
+    *{margin:0;box-sizing:border-box;}
+    body{font-family:"Helvetica Neue","Yu Gothic",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+    header{background:var(--primary);color:#fff;padding:20px 0;}
+    .container{max-width:800px;margin:0 auto;padding:0 20px;}
+    nav{display:flex;justify-content:space-between;align-items:center;}
+    .logo{font-size:22px;font-weight:700;letter-spacing:2px;}
+    nav a{color:#ccc;text-decoration:none;margin-left:20px;font-size:14px;}
+    footer{background:#000;padding:32px 0;text-align:center;font-size:13px;color:var(--text-light);}
+    .form-section{padding:60px 0;max-width:600px;margin:0 auto;}
+    .form-section h1{font-size:28px;margin-bottom:8px;}
+    .form-section p{color:var(--text-light);margin-bottom:32px;}
   </style>
 </head>
 <body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-57TL935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">DEMO STORE</div>
+        <div>
+          <a href="index.html">ホーム</a>
+          <a href="product.html">商品一覧</a>
+          <a href="contact.html">お問い合わせ</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div class="container">
+    <div class="form-section">
+      <h1>お問い合わせ</h1>
+      <p>お気軽にお問い合わせください。</p>
+      <script src="https://js-na2.hsforms.net/forms/embed/246073146.js" defer></script>
+      <div class="hs-form-frame" data-region="na2" data-form-id="d14077cc-3f1a-4b73-9d7d-70bf51bd6927" data-portal-id="246073146"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 DEMO STORE &mdash; GA4/GTM練習用サイト</p>
+    </div>
+  </footer>
+  <script>
+    window.addEventListener('message',function(event){
+      if(event.data.type==='hsFormCallback'&&event.data.eventName==='onFormSubmit'){
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({'event':'generate_lead','form_name':'contact','inquiry_type':'hubspot_form'});
+      }
+    });
+  </script>
+</body>
+</html>
